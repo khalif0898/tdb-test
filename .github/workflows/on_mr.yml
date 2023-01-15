@@ -1,6 +1,5 @@
 name: Validate on MR
 on:
-  workflow_displatch:
   pull_request:
     branches:
       [ main ]
