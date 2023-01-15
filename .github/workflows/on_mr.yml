@@ -1,0 +1,25 @@
+name: Validate on MR
+on:
+  workflow_displatch:
+  pull_request:
+    paths:
+      - 'tdb_test/**'
+
+jobs:
+  lint:
+  runs-on: ubuntu-latest
+  defaults:
+      run:
+        working-directory: app/
+  steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - uses: subosito/flutter-action@v2.7.1
+        with:
+          flutter-version: '3.3.1'
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
